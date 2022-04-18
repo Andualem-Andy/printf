@@ -4,11 +4,6 @@
  *          And - Damiano 
  */
 
-#include "main.h"
-
-int _printf(const char *format, ...)
-
-{
 #include <stdarg.h>
 #include "main.h"
 /**
@@ -48,6 +43,4 @@ char *rot13(va_list list)
 	nstr[i] = '\0';
 
 	return (nstr);
-}
-return (0);
 }
