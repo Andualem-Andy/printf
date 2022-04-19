@@ -1,10 +1,5 @@
-# 0x11. C - printf
-Foundations - Low-level programming & Algorithm ― Hatching out
-by Julien Barbier, co-founder at Holberton School.
-Project to be done in teams of 2 people (your team: Abel Berhanu, Robel Amde)
+# printf
+Holberton School 0x11. C - printf
+_printf version 1.0
 
-## Background Context
-* Write your own `printf` function.
-
-
-It is developed by **Abel** and **Robel** 
+by Alex Senges and Leandro Irigoyen

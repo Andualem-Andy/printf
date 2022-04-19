@@ -1,32 +1,36 @@
-#ifndef _MAIN_H
-#define _MAIN_H
-
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef PRINTF
+#define PRINTF
 #include <stdarg.h>
 #include <string.h>
-#include <unistd.h>
-
+#include <stdlib.h>
+#include <stdio.h>
+#include <stddef.h>
+#include "main.h"
+#include <stdarg.h>
 /**
- * struct s_type- structure
- * @args- pointer arguments
- * @func: pointer function
+ * hexa - struct
+ * @i: integer
+ * @c: characters
  */
-typedef struct s_type
+typedef struct rot13
 {
-	char *args;
-	int (*func)(va_list);
-} s_type;
+	char c;
+} rt;
+/**
+ * prf -prf
+ * @c: characters
+ * @f: pointer to function
+ */
+typedef struct prf
+{
+	char c;
+	int (*f)(va_list p);
 
-int _putchar(char c);
+} pr;
 int _printf(const char *format, ...);
-int(*_typefor(const char *argu, int argb))(va_list);
-int p_char(va_list list);
-int p_string(va_list list);
-int p_int(va_list list);
-int count_num(unsigned int n);
-int p_rot13(char *s);
-int print_R(va_list list);
-int p_binary(va_list list);
-
+int print_int(va_list i);
+int print_string(va_list s);
+int print_char(va_list c);
+int _putchar(char c);
+int print_percent(va_list c);
 #endif
