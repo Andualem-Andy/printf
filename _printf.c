@@ -1,46 +1,43 @@
 #include "main.h"
 /**
- * _printf - Our own printf
- * @format: Check format
- * Return: len
+ * _printf - printf function
+ * @format: const char pointer
+ * Return: b_len
  */
 int _printf(const char *format, ...)
 {
-	va_list ap;
-	int i, j, len = 0;
-	int count = 0;
+	int (*pfunc)(va_list, flags_t *);
+	const char *p;
+	va_list arguments;
+	flags_t flags = {0, 0, 0};
 
-	va_start(ap, format);
-	if (format == NULL)
-		exit(98);
-	for (i = 0; format[i] != '\0'; i++)
+	register int count = 0;
+
+	va_start(arguments, format);
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (p = format; *p; p++)
 	{
-		if (format[i] == '%')
+		if (*p == '%')
 		{
-			for (j = 0; arg[j].name; j++)
+			p++;
+			if (*p == '%')
 			{
-				if (format[i + 1] == *arg[j].name)
-				{
-					len += arg[j].f(ap);
-					break;
-				}
+				count += _putchar('%');
+				continue;
 			}
-			if (!arg[j].name && format[i + 1] != '\0')
-			{
-				_putchar(format[i]);
-				i--;
-				len++;
-			}
-			if (!arg[j].name && format[i + 1] == '\0')
-				return (-1);
-			i++;
-		}
-		else if (format[i] != '%')
-		{
-			_putchar(format[i]);
-			count++;
-		}
+			while (get_flag(*p, &flags))
+				p++;
+			pfunc = get_print(*p);
+			count += (pfunc)
+				? pfunc(arguments, &flags)
+				: _printf("%%%c", *p);
+		} else
+			count += _putchar(*p);
 	}
-	va_end(ap);
-	return (count + len);
+	_putchar(-1);
+	va_end(arguments);
+	return (count);
 }
